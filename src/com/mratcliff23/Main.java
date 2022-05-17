@@ -1,10 +1,12 @@
 package com.mratcliff23;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     static Scanner in = new Scanner(System.in);
+    public static ArrayList<Result> ans = new ArrayList();
 
     public static void main(String[] args) {
         String choice = " ";
@@ -61,26 +63,29 @@ public class Main {
                     choice = in.nextLine();
 
 
-                    int[][] result;
+                    //int[][] result;
                     if (choice.equalsIgnoreCase("1")) {
                         try{
-                            result = mat.addOrSubMatrices(mat2.getMat(), true);
-                            Matrix.printMat(result);
+                            Matrix result = new Matrix(mat.addOrSubMatrices(mat2.getMat(), true));
+                            ans.add(result);
+                            System.out.println(result);
                         }catch (Exception e){
                             System.out.println("These matrices don't have the same dimensions");
                         }
 
                     } else if (choice.equalsIgnoreCase("2")) {
                         try{
-                            result = mat.addOrSubMatrices(mat2.getMat(), true);
-                            Matrix.printMat(result);
+                            Matrix result = new Matrix(mat.addOrSubMatrices(mat2.getMat(), false));
+                            ans.add(result);
+                            System.out.println(result);
                         }catch (Exception e){
                             System.out.println("These matrices don't have the same dimensions");
                         }
                     } else if (choice.equalsIgnoreCase("3")) {
                         try{
-                            result = mat.multiplyMatrices(mat2.getMat());
-                            Matrix.printMat(result);
+                            Matrix result = new Matrix(mat.multiplyMatrices(mat2.getMat()));
+                            ans.add(result);
+                            System.out.println(result);
                         }catch (Exception e){
                             System.out.println("These matrices don't have the right dimensions\n" +
                                     "please make sure the number of columns in the first matrix " +
@@ -92,25 +97,39 @@ public class Main {
                         if (choice.equalsIgnoreCase("a")) {
                             System.out.print("What number would you like to multiply it by: ");
                             choice = in.nextLine();
-                            result = mat.multiplyMatrix(Integer.parseInt(choice));
-                            Matrix.printMat(result);
+                            Matrix result = new Matrix(mat.multiplyMatrix(Integer.parseInt(choice)));
+                            ans.add(result);
+                            System.out.println(result);
                         } else if (choice.equalsIgnoreCase("b")) {
                             System.out.print("What number would you like to multiply it by: ");
                             choice = in.nextLine();
-                            result = mat2.multiplyMatrix(Integer.parseInt(choice));
-                            Matrix.printMat(result);
+                            Matrix result = new Matrix(mat2.multiplyMatrix(Integer.parseInt(choice)));
+                            ans.add(result);
+                            System.out.println(result);
                         }
                     } else if (choice.equalsIgnoreCase("5")) {
                         System.out.print("Which matrix would you like to print (A/B): ");
                         choice = in.nextLine();
                         if (choice.equalsIgnoreCase("a")) {
-                            Matrix.printMat(mat.getMat());
+                            System.out.println(mat);
                         } else if (choice.equalsIgnoreCase("b")) {
-                            Matrix.printMat(mat2.getMat());
+                            System.out.println(mat2);
                         }
                     }
                 }
-                }
+            }else if(choice.equalsIgnoreCase("3")){
+
+            }else if(choice.equalsIgnoreCase("4")){
+
+            }else if(choice.equalsIgnoreCase("5")){
+                System.out.println("\n\n" +
+                        "which previous answer do you want: (e.x. 0 to go to the previous one");
+                System.out.print("Enter your choice: ");
+                int backward = in.nextInt();
+                in.nextLine();
+                System.out.println(ans.get(ans.size()-(backward+1)));
+
+            }
 
         }
     }
@@ -122,9 +141,9 @@ public class Main {
                 "Enter the character corresponding to your choice: \n" +
                 "1) Simplify Expression \n" +
                 "2) Matrix Operations \n" +
-                "2) Solve Equation \n" +
-                "3) Convert between Number Systems \n" +
-                "4) Get Previous Result \n" +
+                "3) Solve Equation \n" +
+                "4) Convert between Number Systems \n" +
+                "5) Get Previous Result \n" +
                 "Q) Quit program");
         System.out.print("Enter your choice here: ");
         choice = in.nextLine();

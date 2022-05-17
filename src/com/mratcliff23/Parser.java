@@ -19,6 +19,19 @@ public class Parser {
         return false;
     }
 
+    public boolean containMatrix(){
+        for(String n : parsed){
+            switch(n){
+                case "Mat1":
+                case "Mat2":
+                case "MatA":
+                case "MatB":
+                    return true;
+            }
+        }
+        return false;
+    }
+
 
 
     public String[] getParsed() {

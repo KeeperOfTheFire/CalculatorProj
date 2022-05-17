@@ -2,13 +2,22 @@ package com.mratcliff23;
 
 import java.util.Scanner;
 
-public class Matrix {
-    private final Scanner in;
+public class Matrix extends Result {
+    private final Scanner in = new Scanner(System.in);
     private final int[][] mat;
+    private String name;
 
     public Matrix(int rows, int cols){
         this.mat = new int[rows][cols];
-        in = new Scanner(System.in);
+    }
+
+    public Matrix(int rows, int cols, String name){
+        this.mat = new int[rows][cols];
+        this.name = name;
+    }
+
+    public Matrix(int[][] mat){
+        this.mat = mat;
     }
 
     public void fillMatrix(){
@@ -73,12 +82,25 @@ public class Matrix {
         return mat;
     }
 
-    public static void printMat(int[][] mat){
+//    public static void printMat(int[][] mat){
+//        System.out.println();
+//        for (int[] row : mat) {
+//            for (int col : row) {
+//                System.out.format("%-4d", col);
+//            }
+//            System.out.println();
+//        }
+//    }
+
+    public String toString(){
+        String result = "";
         for(int[] row: mat){
             for(int col: row){
-                System.out.print(col + ", ");
+                result += col + " ";
             }
-            System.out.println();
+            result += "\n";
         }
+
+        return result;
     }
 }
