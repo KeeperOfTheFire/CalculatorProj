@@ -9,6 +9,7 @@ public class Main2 {
     public static void main(String[] args) {
        String input = "";
         while (!input.equalsIgnoreCase("q") && !input.equalsIgnoreCase("quit")) {
+            System.out.print("enter your input, it can be an expression like '1+1', or a command like 'ans' or 'mat': ");
             input = in.nextLine();
             Parser parsed = new Parser(input);
             if(parsed.isExpression()){

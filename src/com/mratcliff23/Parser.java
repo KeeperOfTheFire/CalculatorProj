@@ -1,5 +1,7 @@
 package com.mratcliff23;
 
+import java.util.Locale;
+
 public class Parser {
     private String[] parsed;
 
@@ -21,12 +23,8 @@ public class Parser {
 
     public boolean containMatrix(){
         for(String n : parsed){
-            switch(n){
-                case "Mat1":
-                case "Mat2":
-                case "MatA":
-                case "MatB":
-                    return true;
+            if(n.toLowerCase().indexOf("mat") >= 0){
+                return true;
             }
         }
         return false;

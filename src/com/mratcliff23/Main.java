@@ -19,8 +19,7 @@ public class Main {
                         "Enter an expression with each term separated by a space " +
                         "(ex: 1 + 1):");
                 String expression = in.nextLine();
-                Expressions exp = new Expressions(expression);
-                exp.solve();
+                System.out.println(Expressions.eval(expression));
 
             //matrix operations
             }else if(choice.equalsIgnoreCase("2")) {
@@ -118,10 +117,6 @@ public class Main {
                     }
                 }
             }else if(choice.equalsIgnoreCase("3")){
-
-            }else if(choice.equalsIgnoreCase("4")){
-
-            }else if(choice.equalsIgnoreCase("5")){
                 System.out.println("\n\n" +
                         "which previous answer do you want: (e.x. 0 to go to the previous one");
                 System.out.print("Enter your choice: ");
@@ -141,9 +136,7 @@ public class Main {
                 "Enter the character corresponding to your choice: \n" +
                 "1) Simplify Expression \n" +
                 "2) Matrix Operations \n" +
-                "3) Solve Equation \n" +
-                "4) Convert between Number Systems \n" +
-                "5) Get Previous Result \n" +
+                "3) Convert between Number Systems \n" +
                 "Q) Quit program");
         System.out.print("Enter your choice here: ");
         choice = in.nextLine();
