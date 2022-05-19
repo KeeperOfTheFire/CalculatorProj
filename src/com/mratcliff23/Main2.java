@@ -12,18 +12,19 @@ public class Main2 {
 
     public static void main(String[] args) {
        String input = "";
+       System.out.println("enter your input, it can be an expression like '1+1', or a command like 'ans' or 'mat'");
         while (!input.equalsIgnoreCase("q") && !input.equalsIgnoreCase("quit")) {
-            System.out.print("enter your input, it can be an expression like '1+1', or a command like 'ans' or 'mat': ");
+            System.out.print("in: ");
             input = in.nextLine();
             Parser parsed = new Parser(input);
 
             if(parsed.containMatrix()){
                 int rows, cols;
                 System.out.println("Initializing Matrix 'MatA':");
-                System.out.print("enter the number of rows for the Matrix " + parsed.getParsed()[0] + ": ");
+                System.out.print("enter the number of rows for the MatA: ");
                 rows = in.nextInt();
                 in.nextLine();
-                System.out.print("\n" + "enter the number of columns for the matrix " + parsed.getParsed()[0] + ": ");
+                System.out.print("\n" + "enter the number of columns for the matrix MatA: ");
                 cols = in.nextInt();
                 in.nextLine();
 
@@ -33,10 +34,10 @@ public class Main2 {
 
 
                 System.out.println("Initializing Matrix 'MatB':");
-                System.out.print("enter the number of rows for the Matrix " + parsed.getParsed()[0] + ": ");
+                System.out.print("enter the number of rows for the Matrix MatB: ");
                 rows = in.nextInt();
                 in.nextLine();
-                System.out.print("\n" + "enter the number of columns for the matrix " + parsed.getParsed()[0] + ": ");
+                System.out.print("\n" + "enter the number of columns for the matrix MatB: ");
                 cols = in.nextInt();
                 in.nextLine();
 

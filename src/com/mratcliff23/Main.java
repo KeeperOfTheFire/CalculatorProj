@@ -19,7 +19,17 @@ public class Main {
                         "Enter an expression with each term separated by a space " +
                         "(ex: 1 + 1):");
                 String expression = in.nextLine();
-                System.out.println(Expressions.eval(expression));
+
+                Expressions exp = new Expressions(expression);
+
+                try {
+                    exp.doEval();
+                    ans.add(exp);
+                    System.out.println(exp);
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+
 
             //matrix operations
             }else if(choice.equalsIgnoreCase("2")) {
@@ -69,7 +79,7 @@ public class Main {
                             ans.add(result);
                             System.out.println(result);
                         }catch (Exception e){
-                            System.out.println("These matrices don't have the same dimensions");
+                            System.out.println(e.getMessage());
                         }
 
                     } else if (choice.equalsIgnoreCase("2")) {
@@ -78,7 +88,7 @@ public class Main {
                             ans.add(result);
                             System.out.println(result);
                         }catch (Exception e){
-                            System.out.println("These matrices don't have the same dimensions");
+                            System.out.println(e.getMessage());
                         }
                     } else if (choice.equalsIgnoreCase("3")) {
                         try{
@@ -86,9 +96,7 @@ public class Main {
                             ans.add(result);
                             System.out.println(result);
                         }catch (Exception e){
-                            System.out.println("These matrices don't have the right dimensions\n" +
-                                    "please make sure the number of columns in the first matrix " +
-                                    "is equal to the number of rows in the second matrix");
+                            System.out.println(e.getMessage());
                         }
                     } else if (choice.equalsIgnoreCase("4")) {
                         System.out.print("Which matrix would you like to multiply (A/B): ");
@@ -136,7 +144,7 @@ public class Main {
                 "Enter the character corresponding to your choice: \n" +
                 "1) Simplify Expression \n" +
                 "2) Matrix Operations \n" +
-                "3) Convert between Number Systems \n" +
+                "3) Get a previous Answer \n" +
                 "Q) Quit program");
         System.out.print("Enter your choice here: ");
         choice = in.nextLine();

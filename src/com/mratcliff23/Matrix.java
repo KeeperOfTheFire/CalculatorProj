@@ -32,7 +32,7 @@ public class Matrix extends Result {
     public int[][] multiplyMatrices(int[][] secondMat){
         int[][] result = new int[mat.length][secondMat[0].length];
         if(mat[0].length != secondMat.length){
-            throw new ArithmeticException("these matrcices cant be multiplied");
+            throw new ArithmeticException("wrong dimensions, these matrices cant be multiplied");
         }
 
 
@@ -54,7 +54,7 @@ public class Matrix extends Result {
     public int[][] addOrSubMatrices(int[][] secondMat, boolean adding){
         int[][] result = new int[mat.length][mat[0].length];
         if(mat.length != secondMat.length || mat[0].length != secondMat[0].length){
-            throw new ArithmeticException("these matrices cant be added or subtracted");
+            throw new ArithmeticException("wrong dimensions, these matrices cant be added or subtracted");
         }
         for (int row = 0; row < mat.length; row++) {
             for (int col = 0; col < mat[row].length; col++) {
@@ -81,16 +81,6 @@ public class Matrix extends Result {
     public int[][] getMat() {
         return mat;
     }
-
-//    public static void printMat(int[][] mat){
-//        System.out.println();
-//        for (int[] row : mat) {
-//            for (int col : row) {
-//                System.out.format("%-4d", col);
-//            }
-//            System.out.println();
-//        }
-//    }
 
     public String toString(){
         String result = "";

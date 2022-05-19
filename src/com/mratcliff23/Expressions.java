@@ -3,8 +3,27 @@ package com.mratcliff23;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Expressions {
-    public static double eval(final String str) {
+public class Expressions extends Result {
+
+    private String expression;
+    private double result;
+
+    public Expressions(String expression){
+        this.expression = expression;
+    }
+
+    public void doEval(){
+        this.result = eval(expression);
+    }
+
+
+    // possible solutions: https://www.geeksforgeeks.org/expression-evaluation/
+    // https://codereview.stackexchange.com/questions/224650/evaluating-a-math-expression-given-in-string-format
+    //https://www.geeksforgeeks.org/parsing-string-of-symbols-to-expression/
+
+
+    //used solution: https://stackoverflow.com/questions/3422673/how-to-evaluate-a-math-expression-given-in-string-form
+    public double eval(final String str) {
         return new Object() {
             int pos = -1, ch;
 
@@ -88,5 +107,12 @@ public class Expressions {
                 return x;
             }
         }.parse();
+    }
+
+    @Override
+    public String toString() {
+        if(result == (int)result)
+            return String.valueOf((int)result);
+        return String.valueOf(result);
     }
 }

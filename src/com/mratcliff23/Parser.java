@@ -34,10 +34,10 @@ public class Parser {
 
     public boolean matrixOperations(){
         for(int i = 1; i < parsed.length-1; i++){
-            if(parsed[i].equals("*") || parsed[i].equals("/") || parsed[i].equals("+") || parsed[i].equals("-")){
+            if(parsed[i].equals("*") || parsed[i].equals("+") || parsed[i].equals("-")){
                 if(parsed[i-1].equalsIgnoreCase("mata")  || parsed[i+1].equalsIgnoreCase("mata")) {
                     return true;
-                }else if(parsed[i-1].equalsIgnoreCase("matb")  || parsed[i+1].equalsIgnoreCase("matab")){
+                }else if(parsed[i-1].equalsIgnoreCase("matb")  || parsed[i+1].equalsIgnoreCase("matb")){
                     return true;
                 }
             }
@@ -46,7 +46,11 @@ public class Parser {
     }
 
     public Matrix matrixEvaluate(){
-        Matrix result = new Matrix(1, 1);
+        Matrix result;
+
+        if(parsed[1].equalsIgnoreCase("*")){
+            result = new Matrix(parsed[0].multiplyMatrices(parsed[2]));
+        }
 
         return result;
     }
