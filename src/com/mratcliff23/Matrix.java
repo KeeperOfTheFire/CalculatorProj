@@ -5,15 +5,8 @@ import java.util.Scanner;
 public class Matrix extends Result {
     private final Scanner in = new Scanner(System.in);
     private final int[][] mat;
-    private String name;
-
     public Matrix(int rows, int cols){
         this.mat = new int[rows][cols];
-    }
-
-    public Matrix(int rows, int cols, String name){
-        this.mat = new int[rows][cols];
-        this.name = name;
     }
 
     public Matrix(int[][] mat){
@@ -45,8 +38,6 @@ public class Matrix extends Result {
 
             }
         }
-
-
 
         return result;
     }

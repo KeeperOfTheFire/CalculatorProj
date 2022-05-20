@@ -1,8 +1,5 @@
 package com.mratcliff23;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Expressions extends Result {
 
     private String expression;

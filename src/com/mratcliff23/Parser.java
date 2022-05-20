@@ -1,18 +1,20 @@
 package com.mratcliff23;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Parser {
     private String[] parsed;
 
     public Parser(String input) {
-        this.parsed = input.split(" ");
+        this.parsed = input.split("((?=[+*/=-])|(?<=[+*/=-]))");
     }
 
     public boolean isExpression(){
         for(String n : parsed){
             switch(n){
                 case "*":
+                case "/":
                 case "+":
                 case "-":
                     return true;
@@ -44,17 +46,6 @@ public class Parser {
         }
         return false;
     }
-
-    public Matrix matrixEvaluate(){
-        Matrix result;
-
-        if(parsed[1].equalsIgnoreCase("*")){
-            result = new Matrix(parsed[0].multiplyMatrices(parsed[2]));
-        }
-
-        return result;
-    }
-
 
 
     public String[] getParsed() {
