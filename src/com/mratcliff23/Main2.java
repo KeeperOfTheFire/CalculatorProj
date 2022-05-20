@@ -81,7 +81,7 @@ public class Main2 {
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                             }
-                        }else if(parsed.getParsed()[2].compareTo("1") >= 0){
+                        }else if(parsed.getParsed()[2].compareTo("0") >= 0){
 
                         }
                     }
