@@ -1,8 +1,5 @@
 package com.mratcliff23;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
 public class Parser {
     private String[] parsed;
 
