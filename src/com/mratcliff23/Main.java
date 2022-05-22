@@ -6,148 +6,251 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner in = new Scanner(System.in);
-    public static ArrayList<Result> ans = new ArrayList();
+
+    public static ArrayList<Matrix> ans = new ArrayList<>();
+
+    static Matrix matA = new Matrix(0, 0);
+    static Matrix matB = new Matrix(0, 0);
 
     public static void main(String[] args) {
-        String choice = " ";
-        while(!choice.equalsIgnoreCase("q")){
-            choice = menu();
 
-            //expressions
-            if(choice.equalsIgnoreCase("1")){
-                System.out.print("\n\n" +
-                        "Enter an expression with each term separated by a space " +
-                        "(ex: 1 + 1):");
-                String expression = in.nextLine();
+        Matrix result = new Matrix(0, 0);
+        boolean matsInitialized = false;
+        String input;
 
-                Expressions exp = new Expressions(expression);
+        System.out.println("Initialize matrices A and B. these can always be changed using the command 'mat' or 'matrix'");
+        try {
+            initMatrices();
+            matsInitialized = true;
+        } catch (Exception e) {
+            System.out.println("something happened and the matrices arent initialized \n" +
+                    "please run 'mat or 'matrix' before attempting any operations\n");
+            in.nextLine();
+        }
 
-                try {
-                    exp.doEval();
-                    ans.add(exp);
-                    System.out.println(exp);
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
+        System.out.println("enter your input, it can be a matrix operation 'matA * matB', or a command like 'ans', 'mat', or 'help'");
+        do {
+            System.out.print("in: ");
+            input = in.nextLine();
+            Parser parsed = new Parser(input);
+
+
+
+            if (parsed.matrixOperations()) {
+                if (!matsInitialized) {
+                    System.out.println("the matrices haven't been initialized yet \n" +
+                            "please run 'mat' or 'matrix' to initialize them.");
+                    continue;
                 }
 
+                if (parsed.getParsed()[0].equalsIgnoreCase("mata")) {
+                    if (parsed.getParsed()[2].equalsIgnoreCase("matb")) {
+                        try {
+                            switch (parsed.getParsed()[1]) {
+                                case ("+"):
+                                    result = new Matrix(matA.addOrSubMatrices(matB.getMat(), true));
+                                case ("-"):
+                                    result = new Matrix(matA.addOrSubMatrices(matB.getMat(), false));
+                                case ("*"):
+                                    result = new Matrix(matA.multiplyMatrices(matB.getMat()));
 
-            //matrix operations
-            }else if(choice.equalsIgnoreCase("2")) {
-                //initializes the first matrix
-                System.out.print("\n\n" +
-                        "Enter the number of rows matrix A should have: ");
-                int rows = in.nextInt();
-                System.out.print("\n" +
-                        "Enter the number of columns matrix A should have: ");
-                int cols = in.nextInt();
-                Matrix mat = new Matrix(rows, cols);
-                in.nextLine();
-
-                mat.fillMatrix();
-
-
-                //initializes the second matrix
-                System.out.print("\n\n" +
-                        "Enter the number of rows matrix B should have: ");
-                rows = in.nextInt();
-                System.out.print("\n" +
-                        "Enter the number of columns matrix B should have: ");
-                cols = in.nextInt();
-                Matrix mat2 = new Matrix(rows, cols);
-                in.nextLine();
-
-                mat2.fillMatrix();
-
-
-                while (!choice.equalsIgnoreCase("6")) {
-                    System.out.println("\n\n" +
-                            "What would you like to do with your matrices:\n" +
-                            "1) Add\n" +
-                            "2) Subtract\n" +
-                            "3) Multiply\n" +
-                            "4) Multiply by a constant\n" +
-                            "5) Print matrix\n" +
-                            "6) Stop matrix operations");
-                    System.out.print("Enter your choice: ");
-                    choice = in.nextLine();
-
-
-                    //int[][] result;
-                    if (choice.equalsIgnoreCase("1")) {
-                        try{
-                            Matrix result = new Matrix(mat.addOrSubMatrices(mat2.getMat(), true));
+                            }
                             ans.add(result);
                             System.out.println(result);
-                        }catch (Exception e){
+                            continue;
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
+                    }else if (parsed.getParsed()[2].equalsIgnoreCase("mata")) {
+                        try {
+                            switch (parsed.getParsed()[1]) {
+                                case ("+"):
+                                    result = new Matrix(matA.addOrSubMatrices(matA.getMat(), true));
+                                case ("-"):
+                                    result = new Matrix(matA.addOrSubMatrices(matA.getMat(), false));
+                                case ("*"):
+                                    result = new Matrix(matA.multiplyMatrices(matA.getMat()));
 
-                    } else if (choice.equalsIgnoreCase("2")) {
-                        try{
-                            Matrix result = new Matrix(mat.addOrSubMatrices(mat2.getMat(), false));
+                            }
                             ans.add(result);
                             System.out.println(result);
-                        }catch (Exception e){
+                            continue;
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-                    } else if (choice.equalsIgnoreCase("3")) {
-                        try{
-                            Matrix result = new Matrix(mat.multiplyMatrices(mat2.getMat()));
+                    }
+                } else if (parsed.getParsed()[0].equalsIgnoreCase("matb")) {
+                    if (parsed.getParsed()[2].equalsIgnoreCase("mata")) {
+                        try {
+                            switch (parsed.getParsed()[1]) {
+                                case ("+"):
+                                    result = new Matrix(matB.addOrSubMatrices(matA.getMat(), true));
+                                case ("-"):
+                                    result = new Matrix(matB.addOrSubMatrices(matA.getMat(), false));
+                                case ("*"):
+                                    result = new Matrix(matB.multiplyMatrices(matA.getMat()));
+
+                            }
                             ans.add(result);
                             System.out.println(result);
-                        }catch (Exception e){
+                            continue;
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-                    } else if (choice.equalsIgnoreCase("4")) {
-                        System.out.print("Which matrix would you like to multiply (A/B): ");
-                        choice = in.nextLine();
-                        if (choice.equalsIgnoreCase("a")) {
-                            System.out.print("What number would you like to multiply it by: ");
-                            choice = in.nextLine();
-                            Matrix result = new Matrix(mat.multiplyMatrix(Integer.parseInt(choice)));
+                    } else if (parsed.getParsed()[2].equalsIgnoreCase("matb")) {
+                        try {
+                            switch (parsed.getParsed()[1]) {
+                                case ("+"):
+                                    result = new Matrix(matB.addOrSubMatrices(matB.getMat(), true));
+                                case ("-"):
+                                    result = new Matrix(matB.addOrSubMatrices(matB.getMat(), false));
+                                case ("*"):
+                                    result = new Matrix(matB.multiplyMatrices(matB.getMat()));
+
+                            }
                             ans.add(result);
                             System.out.println(result);
-                        } else if (choice.equalsIgnoreCase("b")) {
-                            System.out.print("What number would you like to multiply it by: ");
-                            choice = in.nextLine();
-                            Matrix result = new Matrix(mat2.multiplyMatrix(Integer.parseInt(choice)));
-                            ans.add(result);
-                            System.out.println(result);
-                        }
-                    } else if (choice.equalsIgnoreCase("5")) {
-                        System.out.print("Which matrix would you like to print (A/B): ");
-                        choice = in.nextLine();
-                        if (choice.equalsIgnoreCase("a")) {
-                            System.out.println(mat);
-                        } else if (choice.equalsIgnoreCase("b")) {
-                            System.out.println(mat2);
+                            continue;
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
                         }
                     }
                 }
-            }else if(choice.equalsIgnoreCase("3")){
-                System.out.println("\n\n" +
-                        "which previous answer do you want: (e.x. 0 to go to the previous one");
-                System.out.print("Enter your choice: ");
-                int backward = in.nextInt();
-                in.nextLine();
-                System.out.println(ans.get(ans.size()-(backward+1)));
 
+                if (parsed.getParsed()[1].equalsIgnoreCase("*")) {
+
+                    if(parsed.getParsed()[0].equalsIgnoreCase("mata")) {
+                        try {
+                            result = new Matrix(matA.multiplyMatrix(Integer.parseInt(parsed.getParsed()[2])));
+                            ans.add(result);
+                            System.out.println(result);
+                        } catch (Exception e) {
+                            System.out.println("please multiply the matrix by another matrix or by a number");
+                        }
+                    }else if (parsed.getParsed()[0].equalsIgnoreCase("matb")) {
+                        try {
+                            result = new Matrix(matB.multiplyMatrix(Integer.parseInt(parsed.getParsed()[2])));
+                            ans.add(result);
+                            System.out.println(result);
+                        } catch (Exception e) {
+                            System.out.println("please multiply the matrix by another matrix or by a number");
+                        }
+                    }else if(parsed.getParsed()[2].equalsIgnoreCase("mata")) {
+                        try {
+                            result = new Matrix(matA.multiplyMatrix(Integer.parseInt(parsed.getParsed()[0])));
+                            ans.add(result);
+                            System.out.println(result);
+                        } catch (Exception e) {
+                            System.out.println("please multiply the matrix by another matrix or by a number");
+                        }
+                    }else if (parsed.getParsed()[2].equalsIgnoreCase("matb")) {
+                        try {
+                            result = new Matrix(matB.multiplyMatrix(Integer.parseInt(parsed.getParsed()[0])));
+                            ans.add(result);
+                            System.out.println(result);
+                        } catch (Exception e) {
+                            System.out.println("please multiply the matrix by another matrix or by a number");
+                        }
+                    }
+                }
+
+            } else if (parsed.getParsed().length == 1 && parsed.getParsed()[0].equalsIgnoreCase("ans")) {
+                getAns();
+            } else if (parsed.getParsed().length == 1 && (parsed.getParsed()[0].equalsIgnoreCase("mat")
+                    || parsed.getParsed()[0].equalsIgnoreCase("matrix"))) {
+                try {
+                    initMatrices();
+                    matsInitialized = true;
+                } catch (Exception e) {
+                    System.out.println("something happened and the matrices arent initialized \n" +
+                            "please run 'mat' or 'matrix' before attempting any operations");
+                    in.nextLine();
+                }
+            } else if (parsed.getParsed().length == 1 && parsed.getParsed()[0].toLowerCase().contains("mat")) {
+                if (!matsInitialized) {
+                    System.out.println("the matrices haven't been initialized yet \n" +
+                            "please run 'mat' or 'matrix' to initialize them.");
+                    continue;
+                }
+
+                if (parsed.getParsed()[0].equalsIgnoreCase("mata")) {
+                    System.out.println(matA);
+                } else {
+                    System.out.println(matB);
+                }
+
+            } else if (parsed.getParsed().length == 1 && parsed.getParsed()[0].equalsIgnoreCase("help")) {
+                help();
             }
 
+        } while (!input.equalsIgnoreCase("q") && !input.equalsIgnoreCase("quit"));//while
+
+        System.out.println("shutting down...");
+
+    }//main
+
+    static void initMatrices() {
+        System.out.println("initialize matA: ");
+
+        //initializes the first matrix
+        System.out.print("Enter the number of rows matA should have: ");
+        int rows = in.nextInt();
+        in.nextLine();
+        System.out.print("Enter the number of columns matA should have: ");
+        int cols = in.nextInt();
+        in.nextLine();
+        matA = new Matrix(rows, cols);
+
+        matA.fillMatrix();
+
+
+        //initializes the second matrix
+        System.out.println("\n" +
+                "initialize matB: ");
+        System.out.print("Enter the number of rows matB should have: ");
+        rows = in.nextInt();
+        in.nextLine();
+        System.out.print("Enter the number of columns matB should have: ");
+        cols = in.nextInt();
+        in.nextLine();
+        matB = new Matrix(rows, cols);
+
+        matB.fillMatrix();
+    }
+
+    static void getAns(){
+        System.out.println("\n\n" +
+                "which previous answer do you want: (e.x. 0 to go to the previous one");
+        System.out.print("Enter your choice: ");
+        int backward = in.nextInt();
+        in.nextLine();
+        try {
+            System.out.println(ans.get(ans.size() - (backward + 1)));
+        } catch (Exception e) {
+            System.out.println("something went wrong \n" +
+                    "You either haven't performed any operations yet, or went too far back");
         }
     }
 
-    public static String menu(){
-        String choice;
-        System.out.println(
-                "\n\n" +
-                "Enter the character corresponding to your choice: \n" +
-                "1) Simplify Expression \n" +
-                "2) Matrix Operations \n" +
-                "3) Get a previous Answer \n" +
-                "Q) Quit program");
-        System.out.print("Enter your choice here: ");
-        choice = in.nextLine();
-        return choice;
+    static void help(){
+        System.out.println("This Calculator supports most matrix operations!!\n" +
+                "here's a quick list of the commands:" +
+                "\n\tmatrix * matrix - the columns of the first matrix must be equal to the rows of the second. \n" +
+                "\t\tthe result will have the rows of the first matrix and the columns of the second " +
+                "(ex. [3 by 2] * [2 by 4] = [3 by 4])" +
+                "\n\tmatrix + matrix - the matrices must have the same dimensions (ex. [2 by 2] + [2 by 2])" +
+                "\n\tmatrix - matrix - the matrices must have the same dimensions (ex. [2 by 2] + [2 by 2])" +
+                "\n\tmatrix * constant - the constant must be a number. (ex. matrix * 2) " +
+                "\n\tconstant * matrix - the constant must be a number. (ex. 2 * matrix)" +
+                "\n\tans - fetches a previous result" +
+                "\n\tmat or matrix - re-initializes the matrices" +
+                "\n\thelp - displays this menu" +
+                "\n\n");
+        System.out.println("there are also some unsupported commands\n" +
+                "here's a quick list:" +
+                "\n\tdividing by a constant" +
+                "\n\tperforming functions (ex. determinant)" +
+                "\n\tanything that's otherwise impossible to do with matrices" +
+                "\n\n");
     }
-}
+} //class

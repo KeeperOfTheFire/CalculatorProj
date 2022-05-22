@@ -2,7 +2,7 @@ package com.mratcliff23;
 
 import java.util.Scanner;
 
-public class Matrix extends Result {
+public class Matrix{
     private final Scanner in = new Scanner(System.in);
     private final int[][] mat;
     public Matrix(int rows, int cols){
@@ -16,8 +16,9 @@ public class Matrix extends Result {
     public void fillMatrix(){
         for(int row = 0; row < mat.length; row++){
             for(int col = 0; col < mat[row].length; col++){
-                System.out.print("Enter a value for the matrix at position ["+row+"]["+col+"]: ");
+                System.out.print("Enter a value for the matrix at position ["+(row+1)+"]["+(col+1)+"]: ");
                 mat[row][col] = in.nextInt();
+                in.nextLine();
             }
         }
     }
@@ -77,7 +78,7 @@ public class Matrix extends Result {
         String result = "";
         for(int[] row: mat){
             for(int col: row){
-                result += col + " ";
+                result += String.format("%-4d", col) + " ";
             }
             result += "\n";
         }
