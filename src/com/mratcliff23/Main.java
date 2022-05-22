@@ -49,10 +49,13 @@ public class Main {
                             switch (parsed.getParsed()[1]) {
                                 case ("+"):
                                     result = new Matrix(matA.addOrSubMatrices(matB.getMat(), true));
+                                    break;
                                 case ("-"):
                                     result = new Matrix(matA.addOrSubMatrices(matB.getMat(), false));
+                                    break;
                                 case ("*"):
                                     result = new Matrix(matA.multiplyMatrices(matB.getMat()));
+                                    break;
 
                             }
                             ans.add(result);
@@ -66,10 +69,13 @@ public class Main {
                             switch (parsed.getParsed()[1]) {
                                 case ("+"):
                                     result = new Matrix(matA.addOrSubMatrices(matA.getMat(), true));
+                                    break;
                                 case ("-"):
                                     result = new Matrix(matA.addOrSubMatrices(matA.getMat(), false));
+                                    break;
                                 case ("*"):
                                     result = new Matrix(matA.multiplyMatrices(matA.getMat()));
+                                    break;
 
                             }
                             ans.add(result);
@@ -85,10 +91,13 @@ public class Main {
                             switch (parsed.getParsed()[1]) {
                                 case ("+"):
                                     result = new Matrix(matB.addOrSubMatrices(matA.getMat(), true));
+                                    break;
                                 case ("-"):
                                     result = new Matrix(matB.addOrSubMatrices(matA.getMat(), false));
+                                    break;
                                 case ("*"):
                                     result = new Matrix(matB.multiplyMatrices(matA.getMat()));
+                                    break;
 
                             }
                             ans.add(result);
@@ -102,10 +111,13 @@ public class Main {
                             switch (parsed.getParsed()[1]) {
                                 case ("+"):
                                     result = new Matrix(matB.addOrSubMatrices(matB.getMat(), true));
+                                    break;
                                 case ("-"):
                                     result = new Matrix(matB.addOrSubMatrices(matB.getMat(), false));
+                                    break;
                                 case ("*"):
                                     result = new Matrix(matB.multiplyMatrices(matB.getMat()));
+                                    break;
 
                             }
                             ans.add(result);

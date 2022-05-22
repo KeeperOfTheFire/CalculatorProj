@@ -4,7 +4,8 @@ public class Parser {
     private String[] parsed;
 
     public Parser(String input) {
-        this.parsed = input.split("((?=[+*-])|(?<=[+*-]))");
+        // https://www.baeldung.com/java-split-string-keep-delimiters
+        this.parsed = input.replace(" ", "").split("((?=[+*-])|(?<=[+*-]))");
     }
 
     public boolean matrixOperations(){
