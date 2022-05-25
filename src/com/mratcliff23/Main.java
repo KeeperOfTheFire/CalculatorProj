@@ -7,7 +7,7 @@ public class Main {
 
     static Scanner in = new Scanner(System.in);
 
-    public static ArrayList<Matrix> ans = new ArrayList<>();
+    static ArrayList<Matrix> ans = new ArrayList<>();
 
     static Matrix matA = new Matrix(0, 0);
     static Matrix matB = new Matrix(0, 0);
@@ -33,7 +33,6 @@ public class Main {
             System.out.print("in: ");
             input = in.nextLine();
             Parser parsed = new Parser(input);
-
 
 
             if (parsed.matrixOperations()) {
@@ -64,7 +63,7 @@ public class Main {
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-                    }else if (parsed.getParsed()[2].equalsIgnoreCase("mata")) {
+                    } else if (parsed.getParsed()[2].equalsIgnoreCase("mata")) {
                         try {
                             switch (parsed.getParsed()[1]) {
                                 case ("+"):
@@ -131,7 +130,7 @@ public class Main {
 
                 if (parsed.getParsed()[1].equalsIgnoreCase("*")) {
 
-                    if(parsed.getParsed()[0].equalsIgnoreCase("mata")) {
+                    if (parsed.getParsed()[0].equalsIgnoreCase("mata")) {
                         try {
                             result = new Matrix(matA.multiplyMatrix(Integer.parseInt(parsed.getParsed()[2])));
                             ans.add(result);
@@ -139,7 +138,7 @@ public class Main {
                         } catch (Exception e) {
                             System.out.println("please multiply the matrix by another matrix or by a number");
                         }
-                    }else if (parsed.getParsed()[0].equalsIgnoreCase("matb")) {
+                    } else if (parsed.getParsed()[0].equalsIgnoreCase("matb")) {
                         try {
                             result = new Matrix(matB.multiplyMatrix(Integer.parseInt(parsed.getParsed()[2])));
                             ans.add(result);
@@ -147,7 +146,7 @@ public class Main {
                         } catch (Exception e) {
                             System.out.println("please multiply the matrix by another matrix or by a number");
                         }
-                    }else if(parsed.getParsed()[2].equalsIgnoreCase("mata")) {
+                    } else if (parsed.getParsed()[2].equalsIgnoreCase("mata")) {
                         try {
                             result = new Matrix(matA.multiplyMatrix(Integer.parseInt(parsed.getParsed()[0])));
                             ans.add(result);
@@ -155,7 +154,7 @@ public class Main {
                         } catch (Exception e) {
                             System.out.println("please multiply the matrix by another matrix or by a number");
                         }
-                    }else if (parsed.getParsed()[2].equalsIgnoreCase("matb")) {
+                    } else if (parsed.getParsed()[2].equalsIgnoreCase("matb")) {
                         try {
                             result = new Matrix(matB.multiplyMatrix(Integer.parseInt(parsed.getParsed()[0])));
                             ans.add(result);
@@ -230,7 +229,7 @@ public class Main {
         matB.fillMatrix();
     }
 
-    static void getAns(){
+    static void getAns() {
         System.out.println("\n\n" +
                 "which previous answer do you want: (e.x. 0 to go to the previous one");
         System.out.print("Enter your choice: ");
@@ -244,7 +243,7 @@ public class Main {
         }
     }
 
-    static void help(){
+    static void help() {
         System.out.println("This Calculator supports most matrix operations!!\n" +
                 "here's a quick list of the commands:" +
                 "\n\tmatrix * matrix - the columns of the first matrix must be equal to the rows of the second. \n" +
