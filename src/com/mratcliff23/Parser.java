@@ -1,7 +1,7 @@
 package com.mratcliff23;
 
 public class Parser {
-    private String[] parsed;
+    private final String[] parsed;
 
     public Parser(String input) {
         // https://www.baeldung.com/java-split-string-keep-delimiters
