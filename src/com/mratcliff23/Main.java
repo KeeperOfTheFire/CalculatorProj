@@ -7,7 +7,7 @@ public class Main {
 
     static Scanner in = new Scanner(System.in);
 
-    static ArrayList<Matrix> ans = new ArrayList<>();
+    static ArrayList<Ans> ans = new ArrayList<>();
 
     static Matrix matA = new Matrix(0, 0);
     static Matrix matB = new Matrix(0, 0);
@@ -18,15 +18,15 @@ public class Main {
         boolean matsInitialized = false;
         String input;
 
-        System.out.println("Initialize matrices A and B. these can always be changed using the command 'mat' or 'matrix'");
-        try {
-            initMatrices();
-            matsInitialized = true;
-        } catch (Exception e) {
-            System.out.println("something happened and the matrices arent initialized \n" +
-                    "please run 'mat or 'matrix' before attempting any operations\n");
-            in.nextLine();
-        }
+//        System.out.println("Initialize matrices A and B. these can always be changed using the command 'mat' or 'matrix'");
+//        try {
+//            initMatrices();
+//            matsInitialized = true;
+//        } catch (Exception e) {
+//            System.out.println("something happened and the matrices arent initialized \n" +
+//                    "please run 'mat or 'matrix' before attempting any operations\n");
+//            in.nextLine();
+//        }
 
         System.out.println("enter your input, it can be a matrix operation 'matA * matB', or a command like 'ans', 'mat', or 'help'");
         do {
@@ -192,6 +192,16 @@ public class Main {
 
             } else if (parsed.getParsed().length == 1 && parsed.getParsed()[0].equalsIgnoreCase("help")) {
                 help();
+            }else if(!input.equalsIgnoreCase("q") && !input.equalsIgnoreCase("quit")){
+                try {
+                    Expression exp = new Expression(input);
+                    exp.eval();
+                    ans.add(exp);
+                    System.out.println(exp);
+
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
 
         } while (!input.equalsIgnoreCase("q") && !input.equalsIgnoreCase("quit"));//while

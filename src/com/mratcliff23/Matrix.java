@@ -2,7 +2,7 @@ package com.mratcliff23;
 
 import java.util.Scanner;
 
-public class Matrix{
+public class Matrix extends Ans{
     private final Scanner in = new Scanner(System.in);
     private final int[][] mat;
     public Matrix(int rows, int cols){
